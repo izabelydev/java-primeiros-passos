@@ -46,3 +46,6 @@ jobs:
       - name: Criar pull request
         run: |
           gh pr create --base main --head feature/yt_rocketseat --title "PR para Main" --body "Pull request automático"
+
+permissions:
+  contents: write
