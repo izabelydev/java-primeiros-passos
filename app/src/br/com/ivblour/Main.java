@@ -7,6 +7,6 @@ import br.com.ivblour.POO.heranca.enums.TipoAnimal;
 public class Main {
     public static void main(String[] args) {
         Cachorro cachorro = new Cachorro("Bob", TipoAnimal.CACHORRO, TamanhoAnimal.MEDIO);
-        System.out.println("\nSucesso");
+        System.out.println("\nSucesso!");
     }
 }
