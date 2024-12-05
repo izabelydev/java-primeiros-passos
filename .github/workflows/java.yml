@@ -25,7 +25,7 @@ jobs:
       - name: Compile Java code
         run: |
           mkdir -p out
-          javac -d out src/**/*.java
+          javac -d out src/**/*
 
       - name: Run application
         run: java -cp out br.com.ivblour.Main
