@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - feature/yt_rocketseat
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build:
