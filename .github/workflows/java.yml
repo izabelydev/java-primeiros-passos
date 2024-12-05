@@ -1,0 +1,52 @@
+name: CI de Java
+
+on:
+  push:
+    branches:
+      - feature/yt_rocketseat
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Verificar código
+        uses: actions/checkout@v3
+
+      - name: Configurar Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '23'
+          distribution: 'temurin'
+
+      - name: Compilar código Java
+        run: |
+          mkdir -p out
+          find app/src -name "*.java" > sources.txt
+          javac -d out @sources.txt
+
+      - name: Rodar aplicação
+        run: java -cp out br.com.ivblour.Main
+
+      - name: Instalar GitHub CLI
+        run: sudo apt-get install gh
+
+      - name: Autenticar com GitHub CLI
+        run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
+
+      - name: Verificar branch de feature
+        run: git checkout feature/yt_rocketseat
+
+      - name: Enviar branch de feature para o remoto
+        run: git push origin feature/yt_rocketseat
+
+      - name: Criar pull request
+        run: |
+          gh pr create --base main --head feature/yt_rocketseat --title "PR para Main" --body "Pull request automático"
+
+permissions:
+  contents: write
+  pull-requests: write
