@@ -35,12 +35,10 @@ jobs:
         run: sudo apt-get install gh
 
       - name: Authenticate with GitHub CLI
-        run: gh auth login --with-token
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
 
       - name: Create pull request
         run: |
-          git checkout -b feature/yt_rocketseat
-          git push origin feature/yt_rocketseat
+          git checkout -b feature/yt_rocketseat # Faz o checkout para a branch de feature
+          git push origin feature/yt_rocketseat  # Push da branch para o repositório remoto
           gh pr create --base main --head feature/yt_rocketseat --title "PR para Main" --body "Pull request automatico"
