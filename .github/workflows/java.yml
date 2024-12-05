@@ -30,3 +30,17 @@ jobs:
 
       - name: Run application
         run: java -cp out br.com.ivblour.Main
+
+      - name: Install GitHub CLI
+        run: sudo apt-get install gh
+
+      - name: Authenticate with GitHub CLI
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh auth login --with-token <<< $GITHUB_TOKEN
+
+      - name: Create pull request
+        run: |
+          git checkout -b feature/yt_rocketseat
+          git push origin feature/yt_rocketseat
+          gh pr create --base main --head feature/yt_rocketseat --title "PR para Main" --body "Pull request automatico"
