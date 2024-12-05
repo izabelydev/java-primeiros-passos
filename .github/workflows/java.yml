@@ -32,7 +32,7 @@ jobs:
         run: sudo apt-get install gh
 
       - name: Autenticar com GitHub CLI
-        run: gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+        run: gh auth login --with-token <<< "${{ secrets.GH_TOKEN }}"
 
       - name: Verificar branch de feature
         run: git checkout feature/yt_rocketseat
